@@ -1,0 +1,40 @@
+Gulp的使用法则
+1、依赖环境安装，安装node并安装npm
+   1.1、说明：gulp是基于nodejs，理所当然需要安装nodejs；
+   1.2、安装：打开nodejs官网，点击硕大的绿色Download按钮，
+        它会根据系统信息选择对应版本（.msi文件）。然后像安装QQ一样安装它就可以了（安装路径随意）。
+   1.3、npm在node安装好的时候自动安装上了。
+2、全局安装gulp
+   2.1、全局安装gulp的目的是为了让它执行任务
+   2.2、执行命令：npm install gulp -g
+   2.3、查看是否安装好gulp -v
+3、新建package.json
+   3.1、可以手动创建，但是一般去自己生成
+   3.2、cd到相应的目录执行npm init
+4、本地安装gulp插件
+   4.1、定位到目录后执行命令：npm install 插件名 --save-dev
+   4.2、将会在目录下面生成一个node_modules文件夹，插件目录就在文件夹里面
+   4.3、为了能够正常使用这些插件，需要在本地执行：npm install gulp --save-dev
+P.S.一共安装了两次gulp，一次在全局，一次在目录内，目录内是为了调用gulp插件功能。
+5、新建gulpfile.js文件（重要）
+   5.1、gulpfile.js文件是gulp的配置文件。是位于项目根目录的普通js文件
+	//导入工具包 require('node_modules里对应模块')
+	var gulp = require('gulp'), //本地安装gulp所用到的地方
+    	less = require('gulp-less');
+ 
+	//定义一个testLess任务（自定义任务名称）
+	gulp.task('testLess', function () {
+    		gulp.src('src/less/index.less') //该任务针对的文件
+        	.pipe(less()) //该任务调用的模块
+        	.pipe(gulp.dest('src/css')); //将会在src/css下生成index.css
+	});
+ 
+	gulp.task('default',['testLess', 'elseTask']); //定义默认任务
+ 
+	//gulp.task(name[, deps], fn) 定义任务  name：任务名称 deps：依赖任务名称 fn：回调函数
+	//gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组) 
+	//gulp.dest(path[, options]) 处理完后文件生成路径
+6、运行gulp
+   6.1、直接执行gulp会调用默认的任务
+   6.2、执行gulp testLess 调用自定义任务
+
