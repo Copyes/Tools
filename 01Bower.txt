@@ -1,0 +1,51 @@
+Bower包管理工具的使用
+1、Bower的环境依赖
+（1）Node，需要安装node环境
+（2）npm：npm是node的包管理工具，只要安装了node那么npm就安装了。
+（3）git：需要从git仓库中获取代码包。linux下不需要安装。window需要安装
+2、安装bower
+安装好上述依赖以后，执行
+npm install -g bower(全局安装)
+3、使用Bower
+安装完就可以使用bower了。可以执行
+bower help 出现可以执行的命令
+4、包的安装
+bower install jquery
+执行完这个就会在当前的目录下面生成一个bower_componnets的文件夹
+目录：
+$ tree bower_components/
+bower_components/
+└── jquery
+    ├── README.md
+    ├── bower.json
+    ├── component.json
+    ├── composer.json
+    ├── jquery-migrate.js
+    ├── jquery-migrate.min.js
+    ├── jquery.js
+    ├── jquery.min.js
+    ├── jquery.min.map
+    └── package.json
+5、包的使用
+按照正常的引用文件的路径引用一斤下载好的包就好了。
+
+*注意
+查看包的列表，并会检查依赖的包
+bower list
+包的搜索：
+当不确定自己要引用的包的名字的时候，就可以使用search命令
+bower search bootstrap
+包的信息
+查看相应包的信息，版本信息之类的。
+bower info bootstrap
+想得到某单个版本的包
+bower info bootstrap#3.0.0
+包的卸载
+bower uninstall jquery
+
+
+
+
+
+
+
