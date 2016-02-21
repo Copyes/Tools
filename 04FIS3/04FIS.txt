@@ -1,0 +1,51 @@
+新学的百度的前端构建工具，简直棒棒的，于是又来写一个使用步骤了。
+1。切换到项目的根目录，默认文件fis-config.js所在的目录为根目录
+fis3 release -d <path>    <path>为任意目录
+例子：fis3 release -d ../output  这样新构建的东西全部在output文件夹啦
+2.这个时候就是要修改配置文件啦，根据自己的需要来写配置文件，比如你需要压缩js，css，图片，以及生成雪碧图的话
+例子：
+	//合并雪碧图
+	 fis.match('::packager', {
+	   spriter: fis.plugin('csssprites')
+	 });
+	//js压缩，内置
+	 fis.match('*.js', {
+	   optimizer: fis.plugin('uglify-js')
+	 });
+	 //合并文件，并且替换页面中的文件路径，简直棒棒棒！！！最喜欢这个
+	 fis.match('*.js', {
+	  packTo: '/static/aio.js',
+	  release: '/static/aio.js'
+	});
+	//css压缩，内置
+	 fis.match('*.css', {
+	   useSprite: true,
+	   optimizer: fis.plugin('clean-css')
+	 });
+	//图片压缩，内置
+	 fis.match('*.png', {
+	   optimizer: fis.plugin('png-compressor')
+	 });
+	 //将静态资源构建到static文件夹下面，并使用hash
+	 fis.match('*.{png,css}', {
+	  useHash: true,
+	  release: '/static/$0'
+	});
+	 //调试专用的
+	 fis.media('debug').match('*.{js,css,png}', {
+	  useHash: false,
+	  useSprite: false,
+	  optimizer: null
+	});
+3.配置好文件了就可以开始构建了哦。如果想要用自带的web server运行的话，那么就直接
+fis3 release 这样就直接构建到内置服服务器啦。
+4.运行内置服务器
+fis3 server start 
+5.自动坚挺文件变化并且自动构建，刷新浏览器，简直好用的不要不要的！！！
+fis3 release -wL   
+
+
+
+
+
+

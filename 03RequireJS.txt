@@ -1,0 +1,20 @@
+requireJS的常用使用规则：
+1.首先去官网下载requirejs
+2.在页面src引用requirejs，顺便加载主入口文件data－main＝‘main’；
+3.在主入口文件中填写require的配置文件。requirejs.config();
+4.在配置文件中的路径要注意不能写上js。paths: {
+		jquery : 'jquery-1.11.3.min'
+	}
+5.使用自定义模块：define(['jquery'],function(){
+	return {
+		isEmpty : function(){},
+		checkLength : function(){},
+		isEqual : function(str1 , str2 ){
+			return str1 === str2 ?true:false;
+		}
+	}
+});
+6.加载并使用配置文件：requirejs(['jquery','validate'],function($,validate){
+	console.log(validate.isEqual(1,1));
+})
+这是简单的使用。
